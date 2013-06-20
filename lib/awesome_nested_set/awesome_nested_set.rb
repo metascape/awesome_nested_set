@@ -552,7 +552,7 @@ module CollectiveIdea #:nodoc:
             transaction(&block)
           rescue ActiveRecord::StatementInvalid => error
             raise unless connection.open_transactions.zero?
-            raise unless error.message =~ /Deadlock found when trying to get lock|Lock wait timeout exceeded/
+            raise unless error.message =~ /Deadlock found when trying to get lock|Lock wait timeout exceeded|deadlock detected/
             raise unless retry_count < 10
             retry_count += 1
             logger.info "Deadlock detected on retry #{retry_count}, restarting transaction"
