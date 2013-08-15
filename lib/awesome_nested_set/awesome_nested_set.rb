@@ -152,7 +152,7 @@ module CollectiveIdea #:nodoc:
               select("#{scope_string}#{column}, COUNT(#{column})").
                   group("#{scope_string}#{column}").
                   having("COUNT(#{column}) > 1").
-                  first.nil?
+                  load.first.nil?
             end
           end
 
